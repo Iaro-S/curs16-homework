@@ -1,8 +1,6 @@
 package ro.fasttrackit.homework16;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class ShopService<T extends ShopItem> {
     private final List<T> shopItems = new ArrayList<>();
@@ -42,5 +40,24 @@ public class ShopService<T extends ShopItem> {
             }
         }
         return result;
+    }
+
+    public Optional<ShopItem> findByName(String name) {
+        for (ShopItem item : shopItems) {
+            if (item.getName().equals(name)) {
+                return Optional.of(item);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public Optional<ShopItem> removeItem(String name) {
+        for (ShopItem item : shopItems) {
+            if (item.getName().equals(name)) {
+                shopItems.remove(name);
+                return Optional.of(item);
+            }
+        }
+        return Optional.empty();
     }
 }
