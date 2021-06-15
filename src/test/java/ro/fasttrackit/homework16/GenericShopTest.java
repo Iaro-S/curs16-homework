@@ -60,14 +60,13 @@ class GenericShopTest {
         ShopService<Fruits> service = new ShopService<>(List.of(
                 new Fruits("Mango", 15, NEW),
                 new Fruits("Cirese", 18, ON_SALE),
-                new Fruits("visine", 10, ON_SALE)
+                new Fruits("Visine", 10, ON_SALE)
         ));
         Optional<ShopItem> result = service.removeItem("Cirese");
-
-        assertThat(result.get().equals(List.of(
+        assertThat(result).isEqualTo(List.of(
                 new Fruits("Mango", 15, NEW),
-                new Fruits("visine", 10, ON_SALE)
-        )));
+                new Fruits("Visine", 10, ON_SALE)
+        ));
     }
 
     @Test

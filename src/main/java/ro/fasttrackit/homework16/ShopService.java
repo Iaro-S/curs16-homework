@@ -52,12 +52,34 @@ public class ShopService<T extends ShopItem> {
     }
 
     public Optional<ShopItem> removeItem(String name) {
-        for (ShopItem item : shopItems) {
-            if (item.getName().equals(name)) {
-                shopItems.remove(name);
-                return Optional.of(item);
+        Iterator<T> iterator = shopItems.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().getName().equals(name)) {
+                iterator.remove();
+
             }
+            //return Optional.of(iterator.next());
         }
         return Optional.empty();
+    }
+
+    @Override
+    public String toString() {
+        return "ShopService{" +
+                "shopItems=" + shopItems +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ShopService)) return false;
+        ShopService<?> that = (ShopService<?>) o;
+        return Objects.equals(shopItems, that.shopItems);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(shopItems);
     }
 }
